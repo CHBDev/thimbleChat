@@ -4,16 +4,17 @@
   <meta charset="UTF-8">
   <title>Thimble Chat</title>
   <link rel="stylesheet" href="./css/index.css">
-  <script src="/socket.io/socket.io.js"></script>
+  <script src="https://cdn.socket.io/socket.io-1.3.5.js"></script>
 </head>
 <body>
   <div id='main'>
+    <h1>THIMBLE</h1>
     <div id='content'></div>
     <div id='options'></div>
     <div id='avatars'></div>
     <div id='chat'>
         <div id='wordButtons'></div>
-        <div id='sentenceBar'><div id='sendButton'></div></div>
+        <div id='sentenceBar'><div id='sendButton' class="button" onclick="sendMessage()">SEND</div></div>
     </div>
 
   </div>

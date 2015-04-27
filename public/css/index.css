@@ -79,220 +79,61 @@ body{
   line-height: 1.38em;
   font-family: "helvetica", helvetica;
   font-weight: normal;
-  background-color: #444444;
+  background-color: #000000;
   color: #cbcbcb;
   height: 100%;
   width:100%;
 }
-textarea{
-  width: 100%;
-  resize: none;
-}
-#movieHolder{
-  display: block;
-  float: right;
-  width: 75%;
-  height: 100%;
- background-color: #343434;
-}
-#movieInnerHolder{
-  height: 100%;
-  display: block;
-}
-video{
-  height: 100%;
-  width: 100%;
-  display: block;
-  margin-left: auto;
-  margin-left: auto;
+
+
+
+#main{
+  background-color: black;
+  position: relative;;
 }
 
-#chatTitle{
-  text-align: center;
-  color: white;
-  line-height: 2.0em;
-}
-
-#chatHolder{
-  display: block;
-  float: right;
-  width: 25%;
-  height: 100%;
-  background-color: #343434;
-  border-top: 2px solid white;
-}
-
-#chatInnerHolder{
-  margin: 1px;
-  height: 100%;
-  display: block;
-  -webkit-box-shadow: inset 2px 2px 1px 0px rgba(0,0,0,0.75);
-  -moz-box-shadow: inset 2px 2px 1px 0px rgba(0,0,0,0.75);
-  box-shadow: inset 2px 2px 1px 0px rgba(0,0,0,0.75);
-}
-#chatTitle{
-  top: 0px;
-  border-bottom: 5px solid rgba(0,0,0,.4);
-}
-#messagesHolder{
-  /*height: 100%;*/
-  width: 100%;
-  display: block;
-  margin-left: auto;
-  margin-left: auto;
-  min-height: 5%;
-  display: block;
-  overflow-y: scroll;
-  max-height: 100%;
-  overflow:scroll;
-  background-color: #303030;
-  padding: 2px;
-
-  padding-bottom: 6em;
-}
-
-.messageBox{
-  text-align: center;
-  display: block;
-  width: 100%;
-  margin: 4px;
-  padding-top: 2px;
-  padding-left: 8px;
-}
-.messageName{
-  text-align: left;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  display: inline-block;
-  width: 19%;
-  float:left;
-}
-.messageDivider{
-  display: inline-block;
-  float: left;
-  width: 5px;
-  height: 5px;
-  background-color: rgba(60,255,60,.5);
-  -webkit-box-shadow: inset 2px 2px 1px 0px rgba(0,0,0,0.75);
-  -moz-box-shadow: inset 2px 2px 1px 0px rgba(0,0,0,0.75);
-  box-shadow: inset 2px 2px 1px 0px rgba(0,0,0,0.75);
-}
-.messageText{
-  text-align: left;
-  display: inline-block;
-  float: right;
-  width:79%;
-}
-
-#messagesHolder > div:nth-of-type(even){
-  -webkit-box-shadow: inset 2px 2px 1px 0px rgba(0,0,0,0.75);
-  -moz-box-shadow: inset 2px 2px 1px 0px rgba(0,0,0,0.75);
-  box-shadow: inset 2px 2px 1px 0px rgba(0,0,0,0.75);
-  padding-top: 3px;
-  background-color: #202020;
-  color: #bababa;
-}
-
-#messagesHolder > div:nth-of-type(even){
-
-}
-
-html #textEntryArea{
-  display: block;
+#chat{
   position: fixed;
   bottom: 0px;
-  left: 0px;
-  background-color: #303030;
-  width: 25%;
-  border-top: 2px solid white;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-}
-
-input, textarea{
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-  font-family: "helvetica", helvetica;
-  font-weight: normal;
-  font-size: 15px;
-  background-color: #222222;
-  color: #cbcbcb;
-  margin: 0;
-  display:block;
-}
-
-#messageSubmit{
-  display: block;
   width: 100%;
+  height: 200px;
+  background-color: green;
 }
 
-html body #messageTextarea{
-  margin: 1px;
-  border: 2px solid #7777aa;
+#wordButtons{
+  position: fixed;
+  z-index: 100;
+  right: 0px;
+  bottom: 0px;
+  width: 200px;
+  height: 200px;
+  background-color: orange;
 }
 
-#messageButton{
-  display: inline-block;
-  font-family: "helvetica", helvetica;
-  font-weight: normal;
-  font-size: 15px;
-  color: #cbcbcb;
+#sentenceBar{
+  position: fixed;
+  width: auto;
+  height: 100px;
+  background-color: blue;
 }
 
-#usernameSubmit{
-  display:block;
-  width: 100%;
-}
 
-#usernameInput{
-  display: inline-block;
-  border: 2px solid gray;
-  margin: 2px;
-}
-
-#usernameButton{
-  display: inline-block;
-  font-family: "helvetica", helvetica;
-  font-weight: normal;
-  font-size: 15px;
-  color: #cbcbcb;
+#sendButton{
+  width: 100px;
+  height: 50px;
 }
 
 .button{
-  margin: 2px;
-  min-width: 80px;
-  max-width: 100px;
+  display: inline-block;
   border: 1px solid white;
   background-color: black;
-  padding-left: .76em;
-  padding-right: .76em;
-  padding-bottom: .44em;
-  padding-top: .44em;
+
 }
 
 @media screen and (max-width: 1280px){
 
   body{
 
-  }
-  #movieHolder{
-    float: none;
-    width: 100%;
-    height: 50%
-
-  }
-  #chatHolder{
-    float: none;
-    width: 100%;
-    height:50%;
-    text-align: center;
-  }
-  html #textEntryArea{
-    width: 100%;
-    text-align: center;
-  }
-  #messagesHolder{
-    max-height: 100%;
   }
 
 }
@@ -301,28 +142,6 @@ html body #messageTextarea{
 
   body{
 
-  }
-  #movieHolder{
-    position: fixed;
-    bottom: 0px;
-    right: 0px;
-    float: right;
-    width: 75%;
-    height: 100%
-
-  }
-  #chatHolder{
-    float: left;
-    width: 25%;
-    height:100%;
-    text-align: center;
-  }
-  html #textEntryArea{
-    width: 25%%;
-    text-align: center;
-  }
-  #messagesHolder{
-    max-height: 100%;
   }
 
 }

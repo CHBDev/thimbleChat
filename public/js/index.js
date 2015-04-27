@@ -1,60 +1,86 @@
-window.thimble = tc = {};
 
 
-tc.socket = io.connect();
+socket = io();
 
-tc.socket.on('userDown', function(data){
-  tc.updateUsers(data);
-});
+  socket.on('userDown', function(data){
+    updateUsers(data);
+  });
 
-tc.socket.on('chatDown', function(data)){
-  tc.updateChat(data);
+  socket.on('chatDown', function(data){
+    updateChat(data);
+  });
+
+  socket.on('contentDown', function(data){
+    updateContent(data);
+  });
+
+  socket.on('wordsDown', function(data){
+    updateWords(data);
+  });
+
+  socket.on('allDown', function(data){
+    updateWords(data);
+    updateUsers(data);
+    updateContent(data);
+    updateChat(data);
+  });
+
+  socket.on('startDown', function(data){
+    socket.emit('startUp', {user:getUserData()});
+  });
+
+
+
+var updateChat = function(data){
+  console.log("client updates Chat");
 };
 
-tc.socket.on('contentDown', function(data)){
-  tc.updateContent(data);
-};
+var updateUsers = function(data){
+    console.log("client updates Users");
 
-tc.socket.on('wordsDown'), function(data){
-  tc.updateWords(data);
-}
-
-tc.updateChat = function(data){
 
 };
 
-tc.updateUsers = function(data){
+var updateContent = function(data){
+    console.log("client updates Content");
+
 
 };
 
-tc.updateContent = function(data){
-
-};
-
-tc.updateWords = function(data){
+var updateWords = function(data){
+  console.log("client updates Words");
   //register worlds in theWords object
   //do someting that actually updates the div's text
 }
 
-tc.sendChat = function(){
-  tc.socket.emit('chatUp', tc.theChatMessage());
+var sendMessage = function(){
+  console.log("client sends chat up");
+  var message = theMessage();
+  console.log("message = ", message);
+  socket.emit('chatUp', {user:getUserData(),message: message} );
 };
 
-tc.sendUser = function(){
-  tc.socket.emit('userUp');
+var sendUser = function(){
+  socket.emit('userUp', getUserData());
 };
 
-tc.sendContent = function(){
-  tc.socket.emit('contentUp');
+var sendContent = function(){
+  socket.emit('contentUp');
 };
 
+var getUserData = function(){
+  return {name: "Joe", avatar: "giraffe"};
+}
 
-tc.theChatMessage = function(){
+
+var theMessage = function(){
   //the array of server numbers
+  console.log("client composes numbers of message");
+  return [10,11,12,13,14,15];
 
 }
 
-tc.theWords = {};
+var theWords = {};
 
 //the message system
 
