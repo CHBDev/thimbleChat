@@ -32,10 +32,9 @@ tc.updateContent = function(data){
 };
 
 tc.updateWords = function(data){
-
+  //register worlds in theWords object
+  //do someting that actually updates the div's text
 }
-
-
 
 tc.sendChat = function(){
   tc.socket.emit('chatUp', tc.theChatMessage());
@@ -54,6 +53,8 @@ tc.theChatMessage = function(){
   //the array of server numbers
 
 }
+
+tc.theWords = {};
 
 //the message system
 
