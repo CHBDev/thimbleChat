@@ -1,0 +1,14 @@
+{
+  "name": "thimblechat",
+  "version": "0.0.1",
+  "description": "limited word chat system",
+  "scripts": {
+    "test": "echo"
+  },
+  "author": "CH Buckingham",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.12.3",
+    "socket.io": "^1.3.5"
+  }
+}
