@@ -69,13 +69,12 @@ table {
 }
 
 html{
-
   width: 100%;
   height: 100%;
 }
 
 body{
-  font-size: 14px;
+  font-size: 16px;
   line-height: 1.38em;
   font-family: "helvetica", helvetica;
   font-weight: normal;
@@ -83,50 +82,97 @@ body{
   color: #cbcbcb;
   height: 100%;
   width:100%;
+  vertical-align: middle;
+
 }
 
-
-
-#main{
-  background-color: black;
-  position: relative;;
+.round{
+  border-radius: 5px;
 }
 
-#chat{
-  position: fixed;
-  bottom: 0px;
+.border{
+  border: 2px solid white;
+}
+
+.centerBlock{
+
+}
+
+#createUserTitle{
   width: 100%;
-  height: 200px;
-  background-color: green;
-}
-
-#wordButtons{
-  position: fixed;
-  z-index: 100;
-  right: 0px;
-  bottom: 0px;
-  width: 200px;
-  height: 200px;
-  background-color: orange;
-}
-
-#sentenceBar{
-  position: fixed;
-  width: auto;
-  height: 100px;
+  height: 8%%;
+  text-align: center;
   background-color: blue;
-}
+  margin-left: auto;
+  margin-right: auto;
 
+}
+#avatarSelection{
+  width: 100%;
+  height: 48%;
+  text-align: center;
+  background-color: blue;
+  margin-left: auto;
+  margin-right: auto;
+}
+html .selected{
+  border: 2px solid white;
+}
+#runningName{
+  width: 100%;
+  height: 8%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+html .selectedFrag{
+  font-size: 1.5em;
+  height: 100%;
+  width: auto;
+  background-color: white;
+  color: black;
+  margin:0 0 0 0;
+  padding: 0 0 0 0;
+  vertical-align: middle;
+  vertical-align: center;
+}
+#nameSelection{
+  width: 100%;
+  height: 22%;
+  text-align: center;
+  background-color: blue;
+  margin-left: auto;
+  margin-right: auto;
+}
+.nameFragment{
+  width: 8em;
+  margin: 1em .5em 1em .5em;
+  padding: .5em .25em .5em .25em;
+  display: inline-block;
+  border: 1px dashed white;
+}
+#createUserButtons{
+  width: 100%;
+  height: 14%;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+#createUserConfirm{
+  width: 50%;
+  height: 100%;
+  background-color: blue;
+  display: inline-block;
+}
+#createUserCancel{
+  width: 50%;
+  height: 100%;
+  background-color: blue;
+    display: inline-block;
+
+}
 
 #sendButton{
-  width: 100px;
-  height: 50px;
-}
-
-.button{
-  display: inline-block;
-  border: 1px solid white;
-  background-color: black;
 
 }
 
@@ -149,7 +195,5 @@ body{
 
 @media screen and (max-width: 768px){
 
-  body{
-    font-size: 13px;
-  }
+
 }

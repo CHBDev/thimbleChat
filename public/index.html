@@ -7,19 +7,42 @@
   <script src="https://cdn.socket.io/socket.io-1.3.5.js"></script>
 </head>
 <body>
-  <div id='main'>
-    <h1>THIMBLE</h1>
-    <div id='content'></div>
-    <div id='options'></div>
-    <div id='avatars'></div>
-    <div id='chat'>
-        <div id='wordButtons'></div>
-        <div id='sentenceBar'><div id='sendButton' class="button" onclick="sendMessage()">SEND</div></div>
+
+  <div id='mainDiv'>
+      <div id='centerColumn'>CENTER</div>
+      <div id='content'>CONTENT</div>
+       <div id='avatars'>AVATARS</div>
+       <div id='leftColumn'>LEFT</div>
+       <div id='rightColumn'>RIGHT</div>
+       <div id='optionsButton'onclick="optionsButtonClicked()">OPTIONS</div>
+       <div id='options'>
+         <ul id='optionsList'>
+           <li>...</li>
+         </ul>
+       </div>
+
+       <div id='createUser'>
+         <div id='createUserTitle'>CREATE</div>
+         <div id='avatarSelection'></div>
+         <div id='runningName'></div>
+         <div id='nameSelection'></div>
+         <div id='createUserButtons'><div id='createUserConfirm' onclick="createUserButtonClicked">CREATE</div><div id='createUserCancel'>RESET</div>
+         </div>
+       </div>
+      <div id='topBar'><h1>THIMBLE</h1></div>
+      <div id='bottomBar'>
+        <div id='userImage'></div>
+        <div id='sendButton' onclick="sendMessage()">SEND</div></div>
+      <div id='wordBox'>
+        <div id='insideWordBox'></div>
+      </div>
+      <div id='extraBubbles'>EXTRA</div>
+      <div id='dimmer'>DIMMER</div>
     </div>
 
-  </div>
-
   <script src="./js/index.js"></script>
+  <script src="./js/helper.js"></script>
+  <script src="./js/creation.js"></script>
 
   <script>
 

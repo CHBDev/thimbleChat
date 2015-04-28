@@ -20,7 +20,7 @@ db.allMessages = {};
 db.newContent = {};
 db.allContent = {};
 
-db.allWords = [0,1,2,3,4,5,6,7,8,9,{10: 'some'},{11: 'kind'},{12: 'of'},{13: 'giraffe'},{14: 'words'},{15: 'here'}, 16,17,18,19,20];
+db.allWords = [0,1,2,3,4,5,6,7,8,9,[10, 'some'],[11, 'kind'],[12, 'of'],[13, 'giraffe'],[14, 'words'],[15, 'here'], 16,17,18,19,20];
 
 db.updateMessages = function(data){
   var mess = db.parseUp("message", data);
@@ -86,10 +86,14 @@ db.parseUp = function(thing, data){
 
 db.getStuff = function(thing, data){
   if(thing === "currentWords"){
-    return db.allUserData[data.user.name].currentWords;
+    return this.allUserData[data.user.name].currentWords;
   }
   if(thing === 'user'){
-    return db.allUserData[data.user.name];
+    var user = this.allUserData[data.user.name];
+    if(user === undefined){
+      user = this.getRandomUsername();
+    }
+    return user;
   }
 };
 
@@ -99,7 +103,27 @@ db.getAll = function(data){
   all.users = db.allUserData;
   all.messages = db.allMessages;
   all.content = db.allContent;
+  all.nameFragments = db.getNameFragments();
+  all.avatarOptions = db.getAvatars();
+  return all;
 };
+
+db.getNameFragments = function(){
+  //TODO hacked hardwired
+  return [[1,"fra"], [2,"moon"], [3,"happy"], [4,'feet'], [5,'gruun'], [6,"anda"], [7,"pink"], [8,"ra"], [9,"fim"], [10,"lim"],[11,"lim"]];
+}
+
+db.getRandomUsername = function(){
+  return "tempThimblePerson";
+}
+
+db.getAvatars = function(){
+  if(false){
+      return [[1,"http://cliparts.co/cliparts/pi5/ooz/pi5oozEMT.png"],[2,"http://img.photobucket.com/albums/v289/jackboots/mecha/silhouette.png"], [3,""]];
+  }else{
+      return [[1,"http://upload.wikimedia.org/wikipedia/en/c/c6/Nelson_Muntz.PNG",[2,"http://upload.wikimedia.org/wikipedia/en/7/77/EricCartman.png"],[3,"https://s-media-cache-ak0.pinimg.com/originals/62/9a/78/629a78e8d3b2e21a6611ff4ad06abd53.jpg"]];
+  }
+}
 
 
 io.on('connection', function(socket) {
