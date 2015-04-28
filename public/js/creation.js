@@ -19,7 +19,7 @@ var updateCreateUser = function(data){
     var div = document.createElement('div');
     div.classList.add('avatarOption');
     div.avatar = avatarOptions[i];
-    div.style.backgroundImage = "url(" + div.avatar[1] + ")";
+    div.style.backgroundImage = urlString( div.avatar[1]);
     avatarSelection.appendChild(div);
     setupAvatarDiv(div);
       if(i===Math.floor(avatarOptions.length/2)){
@@ -94,6 +94,10 @@ var nameFragClicked = function(e){
   }
 };
 
+var urlString = function(str){
+  return "url(" + str + ")";
+}
+
 var enableCreateButton = function(){
   document.getElementById('createUserConfirm').classList.remove('disabled');
 
@@ -109,6 +113,8 @@ var createUserButtonClicked = function(e){
   console.log("CREATE CLICK");
   if(buildingName.length > 2){
     completedUserCreation();
+    userImage.style.backgroundImage = urlString(selectedAvatar.avatar[1]);
+
   }else{
     //nothing
   }

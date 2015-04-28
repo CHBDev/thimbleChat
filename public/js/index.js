@@ -9,6 +9,8 @@ var userCreateEnabled = false;
 var optionsEnabled = false;
 var username = null;
 var avatar = null;
+var largeContent = {x:1280, y: 720};
+var mediumContent = {x: 853, y: 480};
 
 var go = function(){
   if(hasSavedUserData){
@@ -83,6 +85,18 @@ var updateUsers = function(data){
 
 var updateContent = function(data){
     console.log("client updates Content");
+    var data = data.content;
+    if(data[2] == "img"){
+      content.innerHTML = "";
+      content.style.backgroundImage = urlString(data[1]);
+
+    }else if(data[2] === 'video'){
+      var str = "<iframe id='movie' width='853' height='480' src=" + data[1] + " frameborder='0'></iframe>";
+      content.style.backgroundImage = "";
+      content.innerHTML = str;
+      //content.innerHTML = data[1];
+      //content.innerHTML = str;
+    }
 };
 
 var updateWords = function(data){

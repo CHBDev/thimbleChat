@@ -98,6 +98,12 @@ body{
 
 }
 
+#content{
+  background-position: center center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
 #createUserTitle{
   width: 100%;
   height: 8%;

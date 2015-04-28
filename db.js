@@ -89,7 +89,7 @@ db.getAll = function(data){
   all.user = db.getStuff('user', data);
   all.users = db.allUserData;
   all.messages = db.allMessages;
-  all.content = db.allContent;
+  all.content = db.getRandomContent();
   all.nameFragments = db.getNameFragments();
   all.avatarOptions = db.getAvatars();
   all.avatar = null;
@@ -102,7 +102,19 @@ db.getNameFragments = function(){
 }
 
 db.getRandomUsername = function(){
-  return "tempThimblePerson";
+  return "ThimblePerson" + Math.random() * 10000000000 + (+new Date());
+}
+
+db.getRandomContent = function(){
+  var index = Math.floor(Math.random() * 3);
+  var changeTHIs = 8;
+  var content = [
+                  [1,"http://www.bet.com/shows/lets-stay-together/photos/top-childrens-books/_jcr_content/leftcol/flipbook/flipbookimage.flipfeature.dimg/0311-shows-lets-stay-110-wildthings.jpg","img"],
+                  [2, "https://www.youtube.com/embed/PwZnCkoX5gI?rel=0&amp;controls=0&amp;showinfo=0", "video"],
+                  [3, "http://pauls-pizza.com/wp-content/uploads/2014/10/panpizza.png", "img"]
+                  ]
+
+  return content[index];
 }
 
 db.getAvatars = function(){
