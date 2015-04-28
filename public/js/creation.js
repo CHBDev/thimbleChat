@@ -189,12 +189,14 @@ var doBubble = function(words, avatarDiv){
 
 }
 
-var createAvatar = function(data){
-
+var createAvatar = function(user){
+  console.log(user);
+  if(!user.avatar) return;
+  if(user.name === localUser.name) return;
   var avatar = document.createElement('div');
-  avatar.style.backgroundImage = urlString(data.user.avatar);
+  avatar.style.backgroundImage = urlString(user.avatar[1]);
   avatar.classList.add('avatar');
-  avatar.user = data.user;
+  avatar.user = user;
 
 
   var div = document.createElement('div');
@@ -202,15 +204,15 @@ var createAvatar = function(data){
   var p = document.createElement('p');
   div.appendChild(p);
   p.classList.add('textBox');
+  sizeDiv(avatar, 256, 256);
+
 
   avatar.textBox = p;
   avatar.bubble = div;
   avatar.appendChild(div);
-  avatarsOnScreen[avatar.user.name] = data;
+  avatarsOnScreen[user.name] = user;
   avatars.appendChild(avatar);
   //TODO hack, randomly placing them.
-  avatar.style.left = Math.random() * dX;
-  avatar.style.top = Math.random() * dY;
 
 
   return avatar;

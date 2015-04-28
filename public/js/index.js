@@ -7,10 +7,9 @@ var hasSavedUserData = false;
 var mainEnabled = false;
 var userCreateEnabled = false;
 var optionsEnabled = false;
-var username = null;
-var avatar = null;
 var largeContent = {x:1280, y: 720};
 var mediumContent = {x: 853, y: 480};
+var localUser = {name:null,avatar:null, tempName:null, currentWords:[]};
 
 var go = function(){
   if(hasSavedUserData){
@@ -44,7 +43,14 @@ var enableUserCreate = function(){
 socket = io();
 
   socket.on('userDown', function(data){
-    updateUsers(data);
+    localUser.name = data.name;
+    localUser.tempName = null;
+    localUser.avatar = data.avatar;
+  });
+
+  socket.on('showNewUsers', function(users){
+
+    updateUsers(users);
   });
 
   socket.on('chatDown', function(data){
@@ -60,17 +66,20 @@ socket = io();
   });
 
   socket.on('allDown', function(data){
+    if(!localUser.name){
+      localUser.name = data.name;
+      localUser.tempName = data.name;
+    }
     updateCreateUser(data);
     setTimeout(function(){
       updateWords(data);
-      updateUsers(data);
       updateContent(data);
-      updateChat(data);
+
     },0);
   });
 
   socket.on('startDown', function(data){
-    socket.emit('startUp', {user:getUserData()});
+    socket.emit('startUp', localUser);
   });
 
 
@@ -78,11 +87,12 @@ var updateChat = function(data){
   console.log("client updates Chat");
 };
 
-var updateUsers = function(data){
+var updateUsers = function(users){
+  console.log(users);
     console.log("client updates Users");
-    for(var i = 0; i < data.users.length; i++){
-      if(avatarsOnScreen[data.users.name]) continue;
-      createAvatar(data);
+    for(var key in users){
+      if(!users[key] || avatarsOnScreen[users[key].name]) continue;
+      createAvatar(users[key]);
     }
 
 };
@@ -125,21 +135,13 @@ var sendMessage = function(){
   //do local tests
   var message = theMessage();
   console.log("message = ", message);
-  socket.emit('chatUp', {user:getUserData(),message: message} );
+  socket.emit('chatUp', {user:localUser,message: message} );
 };
 
-var sendUser = function(){
-  socket.emit('userUp', getUserData());
-};
 
 var sendContent = function(){
   socket.emit('contentUp');
 };
-
-var getUserData = function(){
-
-  return {name: username, avatar: avatar};
-}
 
 var theMessage = function(){
   //the array of server numbers
@@ -149,7 +151,7 @@ var theMessage = function(){
 }
 
 var completedUserCreation = function(){
-  socket.emit("userUp", {selectedNameFragments: buildingName, user:{name:null}, avatar: selectedAvatar.avatar});
+  socket.emit("newUser", {tempName: localUser.tempName, selectedNameFragments: buildingName, avatar: selectedAvatar.avatar});
   enableMain();
 }
 

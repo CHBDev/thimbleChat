@@ -18,27 +18,25 @@ app.use(express.static(__dirname + '/public'));
 io.on('connection', function(socket) {
 
   console.log("server is connected");
-  socket.on('userUp', function(data) {
-    db.updateUser(data);
-    socket.broadcast.emit('userDown', {user:db.newUserData});
+  socket.on('newUser', function(userInfo) {
+    var aUser = db.newUser(userInfo);
+    var name = aUser.name;
+    socket.emit('userDown', aUser );
+    socket.emit('showNewUsers', db.allUserData );
+    socket.broadcast.emit('showNewUsers', aUser );
+
+
   });
 
   socket.on('chatUp', function(data) {
-    console.log("DATA on chat up = ", data);
-    console.log("server recieves chat up");
+
     if(db.testMessage(data)){
-      db.updateMessages(data);
       socket.broadcast.emit('chatDown', db.newMessages);
-      socket.emit('wordsDown', {words: db.getNewWords(data)});
+      socket.emit('wordsDown', {words: db.getNewWords(data.name)});
     }else{
-      socket.emit('wordsError', {words: db.getCurrentWords(data)});
+      socket.emit('wordsError', {words: db.getCurrentWords(data.name)});
     }
 
-  });
-
-  socket.on('contentUp', function(data) {
-    db.updateContent(data);
-    socket.broadcast.emit('contentDown', {content:db.newContent});
   });
 
   socket.on('disconnect', function(data) {
@@ -50,8 +48,10 @@ io.on('connection', function(socket) {
     //soemhow based on this data
     //we determine what user it is
     console.log("START ON SERVER: ", data);
-    db.updateUser(data);
-    socket.emit('allDown', db.getAll(data));
+    if(data.name){
+      //test for validation
+    }
+    socket.emit('allDown', db.getAll());
   });
 
   socket.emit('startDown', {});
