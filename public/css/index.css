@@ -100,7 +100,8 @@ body{
 
 #createUserTitle{
   width: 100%;
-  height: 8%%;
+  height: 8%;
+  font-size: 1.5em;
   text-align: center;
   background-color: blue;
   margin-left: auto;
@@ -114,6 +115,15 @@ body{
   background-color: blue;
   margin-left: auto;
   margin-right: auto;
+}
+.avatarOption{
+  height: 100%;
+  width: 20%;
+  display:inline-block;
+  border: 1px dashed white;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center bottom;
 }
 html .selected{
   border: 2px solid white;

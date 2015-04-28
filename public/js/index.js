@@ -7,6 +7,8 @@ var hasSavedUserData = false;
 var mainEnabled = false;
 var userCreateEnabled = false;
 var optionsEnabled = false;
+var username = null;
+var avatar = null;
 
 var go = function(){
   if(hasSavedUserData){
@@ -25,12 +27,14 @@ var disableAll = function(){
 
 var enableMain = function(){
   hideDiv(dimmer);
+  hideDiv(createUser)
   mainEnabled = true;
   userCreateEnabled = false;
 };
 
 var enableUserCreate = function(){
   showDiv(createUser);
+  showDiv(dimmer);
   mainEnabled = false;
   userCreateEnabled = true;
 };
@@ -114,7 +118,8 @@ var sendContent = function(){
 };
 
 var getUserData = function(){
-  return {name: null, avatar: null};
+
+  return {name: username, avatar: avatar};
 }
 
 var theMessage = function(){
@@ -125,7 +130,8 @@ var theMessage = function(){
 }
 
 var completedUserCreation = function(){
-  socket.emit("userUp", {selectedNameFragments: buildingName, user:{name:null}, avatar: selectedAvatar});
+  socket.emit("userUp", {selectedNameFragments: buildingName, user:{name:null}, avatar: selectedAvatar.avatar});
+  enableMain();
 }
 
 var theWords = {};

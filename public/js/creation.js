@@ -8,12 +8,23 @@ var selectedAvatar;
 
 var updateCreateUser = function(data){
 
+  username = data.user;
+  avatar = data.avatar;
+
+  disableCreateButton();
+
   avatarOptions = data.avatarOptions;
   avatarSelection = avatarSelection || document.getElementById('avatarSelection');
-  for(var i = 0; i < avatarOptions; i++){
+  for(var i = 0; i < avatarOptions.length; i++){
     var div = document.createElement('div');
-    div.avatar = avatarOptions()
+    div.classList.add('avatarOption');
+    div.avatar = avatarOptions[i];
     div.style.backgroundImage = "url(" + div.avatar[1] + ")";
+    avatarSelection.appendChild(div);
+    setupAvatarDiv(div);
+      if(i===Math.floor(avatarOptions.length/2)){
+       makeSelected(div);
+      }
   }
 
 
@@ -26,9 +37,14 @@ var updateCreateUser = function(data){
     nameSelection.appendChild(div);
     div.frag = nameFragments[i];
     setupNameFragDiv(div);
+
   }
 
 };
+
+var setupAvatarDiv = function(div){
+  div.onclick = avatarClicked;
+}
 
 var setupNameFragDiv = function(div){
   div.innerHTML = div.frag[1];
@@ -38,7 +54,13 @@ var setupNameFragDiv = function(div){
 
 var avatarClicked = function(e){
   var div = e.srcElement;
-  selectedAvatar.classList.remove('selected');
+  makeSelected(div);
+}
+
+var makeSelected = function(div){
+  if(selectedAvatar){
+    selectedAvatar.classList.remove('selected');
+  }
   div.classList.add('selected')
   selectedAvatar = div;
 }
@@ -83,6 +105,8 @@ var disableCreateButton = function(){
 
 
 var createUserButtonClicked = function(e){
+
+  console.log("CREATE CLICK");
   if(buildingName.length > 2){
     completedUserCreation();
   }else{
