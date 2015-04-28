@@ -29,7 +29,7 @@ io.on('connection', function(socket) {
     if(db.testMessage(data)){
       db.updateMessages(data);
       socket.broadcast.emit('chatDown', db.newMessages);
-      socket.emit('wordsDown', {words: db.getWords(data)});
+      socket.emit('wordsDown', {words: db.getNewWords(data)});
     }else{
       socket.emit('wordsError', {words: db.getCurrentWords(data)});
     }

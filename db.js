@@ -1,4 +1,5 @@
 var db = {};
+var ADDAI = true;
 db.newUserData = {};
 db.allUserData = {};
 db.newMessages = {};
@@ -16,7 +17,7 @@ db.updateMessages = function(data){
 
 db.updateUser = function(data){
   var user = data.user.name;
-  var userObj = {name: user, avatar: data.user.avatar, currentWords: db.getNewWords(data)};
+  var userObj = {name: user, avatar: data.user.avatar};
   db.newUserData[user] = userObj;
   db.allUserData[user] = userObj;
   //check updated data,
@@ -33,13 +34,12 @@ db.getNewWords = function(data){
   return db.allWords.slice(10,16);
 };
 
-db.lockWordsToUser = function(data){
+db.lockWordsToUser = function(words, user){
 
-  var usersWords = db.getStuff("currentWords", data);
-  var newWords = this.getNewWords(data);
-  for(var key in newWords){
-    words[key] = newWords[key];
-  }
+  var usersWords = this.allUserData[user].currentWords
+  usersWords = usersWords.concat(words);
+
+  return usersWords;
   //TODO use some algo to determine what words the user will have access to
 };
 
@@ -70,31 +70,48 @@ db.parseUp = function(thing, data){
 
 };
 
-db.getStuff = function(thing, data){
-  if(thing === "currentWords"){
-    return this.allUserData[data.user.name].currentWords;
-  }
-  if(thing === 'user'){
-    var user = this.allUserData[data.user.name];
-    if(user === undefined){
-      user = this.getRandomUsername();
-      this.updateUser({user:{name:user,avatar: null}});
-    }
-    return user;
-  }
-};
 
-db.getAll = function(data){
+db.getAll = function(){
   var all = {};
-  all.user = db.getStuff('user', data);
-  all.users = db.allUserData;
-  all.messages = db.allMessages;
-  all.content = db.getRandomContent();
-  all.nameFragments = db.getNameFragments();
-  all.avatarOptions = db.getAvatars();
+  all.name = this.getRandomUsername();
+  all.currentRoom = this.getRandomRoom();
+  all.users = this.allUserData[all.currentRoom];
+  all.messages = this.allMessages;
+  all.content = this.getRandomContent();
+  all.nameFragments = this.getNameFragments();
+  all.avatarOptions = this.getAvatars();
   all.avatar = null;
+  all.words = this.lockWordsToUser(this.getNewWords(), all.user);
+
   return all;
 };
+
+db.makeAIUser = function(name, room){
+  var all = this.getAll();
+  all.currentRoom = room;
+  all.name = name;
+
+
+
+}
+
+db.getCurrentWords = function(user){
+  var words = this.allUserData[user].currentWords;
+  if(!words){
+    this.allUserData[user].currentWords = this.getNewWords(user);
+  }
+}
+
+db.getRandomRoom = function(data){
+  var str = "ThimbleRoom" + + Math.random() * 10000000000 / (+new Date());
+  db.allUserData[str] = {};
+  if(!ADDAI) return str;
+  for(var i = 0; i < 20; i++){
+    var fakeUser = this.makeAIUser("AI" + i, str);
+    db.allUserData[str][fakeUser.name];
+  }
+  return str;
+}
 
 db.getNameFragments = function(){
   //TODO hacked hardwired
@@ -102,7 +119,9 @@ db.getNameFragments = function(){
 }
 
 db.getRandomUsername = function(){
-  return "ThimblePerson" + Math.random() * 10000000000 + (+new Date());
+  var str = "ThimblePerson" + Math.random() * 10000000000 / (+new Date());
+  db.allUserData["create"][str] = {name: str, currentWords:[]};
+  return str;
 }
 
 db.getRandomContent = function(){
@@ -128,6 +147,10 @@ db.getAvatars = function(){
       [5,"http://cartoon-characters.com/wp-content/uploads/2014/04/Susie-Carmichael.png"]
       ];
   }
+}
+
+db.getRandomAvatar = function(){
+
 }
 
 

@@ -98,6 +98,27 @@ body{
 
 }
 
+.wordButton{
+  width: 8em;
+  margin: .5em 1em .5em 1em;
+  padding: .25em .5em .25em .5em;
+  display: inline-block;
+  border: 1px dashed white;
+  vertical-align: middle;
+  text-align: center;
+
+}
+html .selectedWord{
+   font-size: 1.5em;
+  height: 100%;
+  width: auto;
+  background-color: transparent;
+  color: black;
+  margin:0 .4em 0 .4em;
+  padding: .5em 0 0 0;
+  vertical-align: middle;
+  text-align: center;
+}
 #content{
   background-position: center center;
   background-size: contain;
@@ -147,10 +168,10 @@ html .selectedFrag{
   width: auto;
   background-color: white;
   color: black;
-  margin:0 0 0 0;
-  padding: 0 0 0 0;
+  margin: 0em 0 0em 0;
+  padding: 0em 0em 0em 0em;
   vertical-align: middle;
-  vertical-align: center;
+  text-align: center;
 }
 #nameSelection{
   width: 100%;
@@ -162,8 +183,8 @@ html .selectedFrag{
 }
 .nameFragment{
   width: 8em;
-  margin: 1em .5em 1em .5em;
-  padding: .5em .25em .5em .25em;
+  margin: .5em 1em .5em 1em;
+  padding: .25em .5em .25em .5em;
   display: inline-block;
   border: 1px dashed white;
 }
@@ -190,6 +211,11 @@ html .selectedFrag{
 
 #sendButton{
 
+}
+
+html .disabled{
+  color: #888888;
+  background-color: #aaaaaa;
 }
 
 @media screen and (max-width: 1280px){

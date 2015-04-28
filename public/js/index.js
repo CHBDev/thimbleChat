@@ -80,6 +80,10 @@ var updateChat = function(data){
 
 var updateUsers = function(data){
     console.log("client updates Users");
+    for(var i = 0; i < data.users.length; i++){
+      if(avatarsOnScreen[data.users.name]) continue;
+      createAvatar(data);
+    }
 
 };
 
@@ -101,6 +105,7 @@ var updateContent = function(data){
 
 var updateWords = function(data){
   console.log("client updates Words");
+  addWords(data);
   //register worlds in theWords object
   //do someting that actually updates the div's text
 }

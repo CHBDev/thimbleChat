@@ -5,6 +5,8 @@ var runningName;
 var buildingName = [];
 var avatarOptions = [];
 var selectedAvatar;
+var runningMessage = [];
+var avatarsOnScreen = {};
 
 var updateCreateUser = function(data){
 
@@ -72,7 +74,7 @@ var nameFragClicked = function(e){
     div.remove();
     div.classList.add('selectedFrag');
     runningName.appendChild(div);
-    buildingName.push(div.frag[0]);
+    buildingName.push(div.frag);
     if(buildingName.length > 2){
       enableCreateButton();
     }
@@ -83,7 +85,7 @@ var nameFragClicked = function(e){
     div.classList.remove('selectedFrag');
     nameSelection.appendChild(div);
     for(var i = 0; i < buildingName.length; i++){
-      if(buildingName[i][0] === div.frag[0]){
+      if(buildingName.length > 0 && buildingName[i][0] === div.frag[0]){
         buildingName.splice(i,1);
          if(buildingName.length <= 2){
             disableCreateButton();
@@ -119,3 +121,108 @@ var createUserButtonClicked = function(e){
     //nothing
   }
 }
+
+var addWords = function(data){
+  var words = data.words;
+
+  for(var i = 0; i < words.length; i++){
+    var div = document.createElement('div');
+    div.classList.add('wordButton');
+    div.word = words[i];
+    div.innerHTML =  div.word[1];
+    div.onclick = wordButtonClicked;
+    div.selected = false;
+    wordBox.appendChild(div);
+  }
+
+}
+
+var wordButtonClicked = function(e){
+
+  var div = e.srcElement;
+  if(div.selected === false){
+    div.selected = true;
+    div.remove();
+    div.classList.add('selectedWord');
+    buildingMessage.appendChild(div);
+    runningMessage.push(div.word);
+    if(buildingName.length > 0){
+      enableSendButton();
+    }
+
+  }else{
+    div.selected = false;
+    div.remove();
+    div.classList.remove('selectedWord');
+    wordBox.appendChild(div);
+    for(var i = 0; i < runningMessage.length; i++){
+      if(runningMessage.length > 0 && runningMessage[i][0] === div.word[0]){
+        runningMessage.splice(i,1);
+         if(runningMessage.length < 1){
+            disableSendButton();
+         }
+         break;
+      }
+    }
+  }
+};
+
+var enableSendButton = function(){
+  sendButton.classList.remove('disabled');
+
+}
+
+var disableSendButton = function(){
+  sendButton.classList.add('disabled');
+}
+
+var doBubble = function(words, avatarDiv){
+  var str = "";
+  for(var i = 0; i < words.length; i++){
+    str + words[i] + " ";
+  }
+
+  str[str.length - 1] = ".";
+
+  avatarDiv.textBox.innerHTML = str;
+
+
+}
+
+var createAvatar = function(data){
+
+  var avatar = document.createElement('div');
+  avatar.style.backgroundImage = urlString(data.user.avatar);
+  avatar.classList.add('avatar');
+  avatar.user = data.user;
+
+
+  var div = document.createElement('div');
+  div.classList.add('bubbleDiv');
+  var p = document.createElement('p');
+  div.appendChild(p);
+  p.classList.add('textBox');
+
+  avatar.textBox = p;
+  avatar.bubble = div;
+  avatar.appendChild(div);
+  avatarsOnScreen[avatar.user.name] = data;
+  avatars.appendChild(avatar);
+  //TODO hack, randomly placing them.
+  avatar.style.left = Math.random() * dX;
+  avatar.style.top = Math.random() * dY;
+
+
+  return avatar;
+}
+
+
+
+
+
+
+
+
+
+
+
