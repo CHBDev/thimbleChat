@@ -130,11 +130,14 @@ var setupDivs = function(){
 
   bigDivs.forEach(function(div){
     div.style.position = "absolute";
-    setBackgroundColor(div, 50,200,50,.5);
+    setBackgroundColor(div, 255,127,80,.7);
     roundCorners(div);
     giveBorder(div);
   })
 
+  //setBackgroundColor(avatars, 0,0,0,0);
+  //setBackgroundColor(content, 0,0,0,0);
+   //setBackgroundColor(extraBubbles, 0,0,0,0);
   setBackgroundColor(dimmer, 0,0,0,.5);
 
   hideDiv(options);

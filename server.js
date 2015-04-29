@@ -31,7 +31,7 @@ io.on('connection', function(socket) {
   socket.on('chatUp', function(data) {
 
     if(db.testMessage(data)){
-      socket.broadcast.emit('chatDown', db.newMessages);
+      socket.broadcast.emit('chatDown', {name: AI1,words: [[1,"Hi"],[2,"fern"],[3,"dog"],[4,"plenty"],[5,"a"],[6,"place"]]});
       socket.emit('wordsDown', {words: db.getNewWords(data.name)});
     }else{
       socket.emit('wordsError', {words: db.getCurrentWords(data.name)});

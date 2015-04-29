@@ -98,26 +98,36 @@ body{
 
 }
 
+html .avatar{
+  z-index: 41;
+  position: absolute;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
 .wordButton{
   width: 8em;
   margin: .5em 1em .5em 1em;
   padding: .25em .5em .25em .5em;
   display: inline-block;
+  font-size: 1.3em;
   border: 1px dashed white;
   vertical-align: middle;
   text-align: center;
+  color: white;
+  background-color: rgba(100,149,237,1);
 
 }
 html .selectedWord{
-   font-size: 1.5em;
+  font-size: 1.8em;
   height: 100%;
   width: auto;
-  background-color: transparent;
-  color: black;
   margin:0 .4em 0 .4em;
   padding: .5em 0 0 0;
   vertical-align: middle;
   text-align: center;
+  color: black;
+  background-color: transparent;
 }
 #content{
   background-position: center center;
@@ -130,7 +140,7 @@ html .selectedWord{
   height: 8%;
   font-size: 1.5em;
   text-align: center;
-  background-color: blue;
+  background-color: rgba(100,149,237,1);
   margin-left: auto;
   margin-right: auto;
 
@@ -139,7 +149,7 @@ html .selectedWord{
   width: 100%;
   height: 48%;
   text-align: center;
-  background-color: blue;
+  background-color: rgba(100,149,237,1);;
   margin-left: auto;
   margin-right: auto;
 }
@@ -177,11 +187,12 @@ html .selectedFrag{
   width: 100%;
   height: 22%;
   text-align: center;
-  background-color: blue;
+  background-color: rgba(100,149,237,1);
   margin-left: auto;
   margin-right: auto;
 }
 .nameFragment{
+  color: white;
   width: 8em;
   margin: .5em 1em .5em 1em;
   padding: .25em .5em .25em .5em;
@@ -198,13 +209,13 @@ html .selectedFrag{
 #createUserConfirm{
   width: 50%;
   height: 100%;
-  background-color: blue;
+  background-color: rgba(100,149,237,1);
   display: inline-block;
 }
 #createUserCancel{
   width: 50%;
   height: 100%;
-  background-color: blue;
+  background-color: rgba(100,149,237,1);
     display: inline-block;
 
 }

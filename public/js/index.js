@@ -53,8 +53,8 @@ socket = io();
     updateUsers(users);
   });
 
-  socket.on('chatDown', function(data){
-    updateChat(data);
+  socket.on('chatDown', function(messages){
+    updateChat(messages);
   });
 
   socket.on('contentDown', function(data){
@@ -83,8 +83,12 @@ socket = io();
   });
 
 
-var updateChat = function(data){
+var updateChat = function(messages){
   console.log("client updates Chat");
+  for(var i = 0; i < messages.length; i++){
+    var message = messages[i];
+    doBubble(message);
+  }
 };
 
 var updateUsers = function(users){
@@ -132,6 +136,8 @@ var optionsButtonClicked = function(){
 
 var sendMessage = function(){
   console.log("SEND CLICK");
+
+  buildingMessage.innerHTML = ""
   //do local tests
   var message = theMessage();
   console.log("message = ", message);

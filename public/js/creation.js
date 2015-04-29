@@ -117,6 +117,24 @@ var createUserButtonClicked = function(e){
     completedUserCreation();
     userImage.style.backgroundImage = urlString(selectedAvatar.avatar[1]);
 
+    var div = document.createElement('div');
+  div.classList.add('bubbleDiv');
+  div.style.backgroundColor = "transparent";
+  var p = document.createElement('p');
+  div.appendChild(p);
+  p.classList.add('textBox');
+  p.style.backgroundColor = "transparent";
+
+  div.style.display = "none";
+  div.style.top = "-100%";
+  div.style.left = "10%";
+
+
+  userImage.textBox = p;
+  userImage.bubble = div;
+  userImage.appendChild(div);
+
+
   }else{
     //nothing
   }
@@ -176,18 +194,7 @@ var disableSendButton = function(){
   sendButton.classList.add('disabled');
 }
 
-var doBubble = function(words, avatarDiv){
-  var str = "";
-  for(var i = 0; i < words.length; i++){
-    str + words[i] + " ";
-  }
 
-  str[str.length - 1] = ".";
-
-  avatarDiv.textBox.innerHTML = str;
-
-
-}
 
 var createAvatar = function(user){
   console.log(user);
@@ -201,17 +208,24 @@ var createAvatar = function(user){
 
   var div = document.createElement('div');
   div.classList.add('bubbleDiv');
+  div.style.backgroundColor = "transparent";
   var p = document.createElement('p');
   div.appendChild(p);
   p.classList.add('textBox');
+  p.style.backgroundColor = "transparent";
   sizeDiv(avatar, 256, 256);
+
+  div.style.display = "none";
+  div.style.top = "-100%";
+  div.style.left = "-10%";
 
 
   avatar.textBox = p;
   avatar.bubble = div;
   avatar.appendChild(div);
-  avatarsOnScreen[user.name] = user;
-  avatars.appendChild(avatar);
+
+  assignAvatarToSlot(avatar);
+
   //TODO hack, randomly placing them.
 
 
